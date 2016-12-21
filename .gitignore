@@ -21,3 +21,4 @@
 .byebug_history
 *.txt
 *.swp
+*.pid

@@ -1,1 +1,27 @@
-Login page
+<% provide(:title, "Login") %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="center">Nothing Much Inside Though..</h3>
+      </div>
+      <div class="panel-body">
+        <%= form_for(:session, url: login_path) do |f| %>
+          <div class="form-group form-group-lg">
+            <%= f.label :email%>
+            <%= f.email_field :email, class: "form-control", 
+              placeholder: "Email", required: true, autofocus: true %>
+          </div>
+          <div class="form-group form-group-lg">
+            <%= f.label :password%>
+            <%= f.password_field :password, class: "form-control",
+              placeholder: "Password", required: true %>
+          </div>
+          <div class="form-group form-group-lg">
+            <%= f.submit "Log In", class: "btn btn-large btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
