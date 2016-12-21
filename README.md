@@ -1,24 +1,10 @@
-# README
+# Twitter Observer
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby version: 2.2.5
 
-Things you may want to cover:
+## Getting started
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. bundle install --without production
+2. rails db:migrate
+3. rails test
+4. rails server
