@@ -3,7 +3,7 @@ require 'test_helper'
 class UsersSignupTest < ActionDispatch::IntegrationTest
 
   test "Sould not save user upon invalid signup submission" do
-    get signup_path
+    get add_user_path
     assert_no_difference "User.count" do
       post users_path, params: {
         user: { 
@@ -18,7 +18,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   end
 
   test "Sould save user upon valid signup submission" do
-    get signup_path
+    get add_user_path
     assert_difference "User.count", 1 do
       post users_path, params: {
         user: { 

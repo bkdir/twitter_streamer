@@ -11,4 +11,7 @@ class NullUser
   end
   def updated_at
   end
+  def authenticate password
+    false
+  end
 end
