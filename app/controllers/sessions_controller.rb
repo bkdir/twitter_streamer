@@ -1,7 +1,10 @@
 class SessionsController < ApplicationController
+  skip_before_filter :login_required, :only => [:new, :create]
   # TODO: users_path should actually be twitter->following page
   #
   def new
+    # FIXME
+    redirect_to users_path if logged_in?
   end
 
   def create
