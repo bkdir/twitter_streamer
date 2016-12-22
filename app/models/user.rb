@@ -9,4 +9,6 @@ class User < ApplicationRecord
 
   validates :password, presence: true, length: { minimum: 6 }
   has_secure_password
+
+  #most recently added user should be on top
 end

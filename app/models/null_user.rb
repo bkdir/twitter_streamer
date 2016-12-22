@@ -1,4 +1,4 @@
-class NullUser < ApplicationRecord
+class NullUser
   def name
   end
   def email
@@ -6,5 +6,9 @@ class NullUser < ApplicationRecord
   def password
   end
   def password_confirmation
+  end
+  def created_at
+  end
+  def updated_at
   end
 end

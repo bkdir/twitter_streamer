@@ -2,37 +2,40 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
     <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="center">Sign up a new User</h3>
-      </div>
+      <div class="panel-heading"><h3 class="center">Add User</h3></div>
       <div class="panel-body">
-        <%= form_for(:users, url: users_new_path ) do |f| %>
+        <%= form_for(@user, url: signup_path) do |f| %>
+          <%= render 'shared/error_messages' %>
+
           <div class="form-group form-group-lg">
-            <%= f.label :username %>
-            <%= f.text_field :username, class: "form-control", 
-                placeholder: "Username", required: true, autofocus: true %>
+            <%= f.label :name %>
+            <%= f.text_field :name, class: "form-control", 
+                placeholder: "Name", required: true, autofocus: true %>
           </div>
+
           <div class="form-group form-group-lg">
             <%= f.label :email%>
             <%= f.email_field :email, class: "form-control", 
                 placeholder: "Email", required: true %>
           </div>
+          
           <div class="form-group form-group-lg">
             <%= f.label :password %>
             <%= f.password_field :password, class: "form-control", 
                 placeholder: "Password", required: true %>
           </div>
+
           <div class="form-group form-group-lg">
             <%= f.label :password_confirmation %>
             <%= f.password_field :password_confirmation, class: "form-control",
                 placeholder: "Confirm Password", required: true%>
           </div>
+
           <div class="form-group form-group-lg">
-            <%= f.submit "Sign Up!", class: "btn btn-large btn-primary" %>
+            <%= f.submit "Add User", class: "btn btn-large btn-primary" %>
           </div>
         <% end %>
-      </div>
-    </div>
-  </div>
-</div>
-
+      </div><!-- panel body -->
+    </div><!-- panel -->
+  </div><!-- column -->
+</div><!-- row -->

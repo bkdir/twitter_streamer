@@ -1,6 +1,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
 body {
   padding-top: 180px;
 }
@@ -35,3 +41,31 @@ footer {
     }
   }
 }
+
+.debug_dump {
+  clear: both;
+  width: 100%;
+  float: left;
+  margin-top: 30px;
+  @include box-sizing;
+}
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box-sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+// form-control
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
