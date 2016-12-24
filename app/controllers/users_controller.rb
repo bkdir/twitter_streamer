@@ -1,12 +1,11 @@
 class UsersController < ApplicationController
-  #TODO: most recently added user should be on top
-  #
+
   def new
     @user = User.new
   end
   
   def index
-    @users = User.all || [NullUser.new]
+    @users = User.all.order(created_at: :desc) || [NullUser.new]
   end
   
   def create
@@ -23,4 +22,5 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
+
 end

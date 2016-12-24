@@ -2,6 +2,14 @@ require 'test_helper'
 
 class UsersSignupTest < ActionDispatch::IntegrationTest
 
+  def setup
+    @user = users(:john)
+    # first, login
+    get login_path
+    assert_template "sessions/new"
+    post login_path, params: { session: {name: @user.name, password: 'password' } }
+  end
+
   test "Sould not save user upon invalid signup submission" do
     get add_user_path
     assert_no_difference "User.count" do
