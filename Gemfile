@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails',       '5.0.0.1'
+gem 'twitter',     '6.0.0'
 gem 'bcrypt',      '3.1.11'  # Use ActiveModel has_secure_password
 gem 'puma',        '3.4.0'   # Use Puma as the app server
 gem 'sass-rails',  '5.0.6'   # Use SCSS for stylesheets
