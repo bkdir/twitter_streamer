@@ -7,7 +7,7 @@ class TweetHandler
       Rails.logger.info(msg)
       puts msg
 
-      #TweetInfo.update_deleted_tweet(tweet)
+      Tweet.update_deleted(tweet)
     end
 
     def on_post(tweet)
@@ -20,7 +20,7 @@ class TweetHandler
       Rails.logger.info(msg)
       puts msg
 
-      #TweetInfo.save(tweet)
+      Tweet.save(tweet)
     end
 
     def on_stall_warning(warning)

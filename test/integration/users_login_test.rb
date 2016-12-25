@@ -8,6 +8,15 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     @user = users(:john)
   end
 
+  test "logged in users should not see the login page" do
+    get login_path
+    assert_template "sessions/new"
+    post login_path, params: { session: {name: @user.name, password: 'password' } }
+    assert is_logged_in?
+    get login_path
+    assert_redirected_to users_url
+  end
+
   test "login with invalid information" do
     get login_path
     assert_template "sessions/new"
