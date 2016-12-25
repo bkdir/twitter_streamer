@@ -54,11 +54,11 @@ class Tweet < ApplicationRecord
          return h
       end
 
-      h[:user_id]    = attrs.fetch(:user, {}).fetch(:id, nil)
-      h[:tweet_id]   = attrs[:id]
-      h[:username]   = attrs.fetch(:user, {}).fetch(:name, nil)
-      h[:text]       = attrs[:text]
-      h[:tweeted_at] = attrs[:created_at]
+      h[:user_id]     = attrs.fetch(:user, {}).fetch(:id, nil)
+      h[:tweet_id]    = attrs[:id]
+      h[:screen_name] = attrs.fetch(:user, {}).fetch(:screen_name, nil)
+      h[:text]        = attrs[:text]
+      h[:tweeted_at]  = attrs[:created_at]
       return h
     end
   end
