@@ -8,4 +8,13 @@ class ActiveSupport::TestCase
   def is_logged_in?
     !session[:user_id].nil?
   end
+
+  def login_test_user(user, password: 'password')
+    post login_path, params: {
+      session: {
+        name: user.name,
+        password: password 
+      }
+    }
+  end
 end

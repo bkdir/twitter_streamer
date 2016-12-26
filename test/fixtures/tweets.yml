@@ -1,19 +1,30 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user_id: MyString
-  tweet_id: MyString
-  username: MyString
+  user_id: 1111
+  tweet_id: 2222
+  screen_name: MyString
   text: MyText
   deleted: false
   tweeted_at: 2016-12-24 16:13:50
   deleted_at: 2016-12-24 16:13:50
 
 two:
-  user_id: MyString
-  tweet_id: MyString
-  username: MyString
+  user_id: 1234
+  tweet_id: 4321
+  screen_name: MyString
   text: MyText
   deleted: false
   tweeted_at: 2016-12-24 16:13:50
   deleted_at: 2016-12-24 16:13:50
+
+<% 40.times do |n| %>
+testtweet<%= n %>:
+  user_id: <%= n %>
+  tweet_id: <%= n %>
+  screen_name: MyString
+  text: MyText
+  deleted: false
+  tweeted_at: 2016-12-25 16:13:50
+  deleted_at: 2016-12-25 16:13:50
+<% end %>

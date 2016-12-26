@@ -1,0 +1,21 @@
+<% users.each do |user| %>
+  <div class="list-group-item">
+    <h4 class="list-group-item-heading">
+      <%= link_to user.name, '#' %>
+    </h4>
+    <p class="list-group-item-text"> 
+      <label>e-mail:</label> <%= user.email %></p>
+    <small class="list-group-item-text">
+      <label>Created at:</label> <%= user.created_at %> |  
+      <label>Updated at:</label> <%= user.updated_at %>
+    </small>
+    <p class="list-group-item-text">
+      <% if current_user?(user) || current_user.admin? %>
+        <%= link_to 'edit', edit_user_path(user) %>
+      <% end %>
+      <% if current_user.admin? && !current_user?(user) %>
+        | <%= link_to 'delete', user, method: :delete, data: { confirm: "Are you sure?" } %>
+      <% end %>
+    </p>
+  </div>
+<% end %>

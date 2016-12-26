@@ -3,8 +3,8 @@ class CreateTweets < ActiveRecord::Migration[5.0]
     create_table :tweets do |t|
       t.integer  :user_id, null: false, limit: 8
       t.integer  :tweet_id, null: false, limit: 8
-      t.string   :screen_name, limit: 20
-      t.string   :text, null: false, limit: 140
+      t.string   :screen_name
+      t.text     :text, null: false
       t.boolean  :deleted
       t.datetime :tweeted_at, null: false
       t.datetime :deleted_at

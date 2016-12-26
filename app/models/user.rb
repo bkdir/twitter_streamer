@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  before_save { email.downcase! && name.downcase! }
+  before_save { email.downcase!; name.downcase! }
   validates :name, presence: true, length: { maximum: 50 },
     uniqueness: { case_sensitive: false }
 
@@ -9,7 +9,9 @@ class User < ApplicationRecord
     uniqueness: { case_sensitive: false }
 
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  # allow_nil is to be able to edit the user w.o password.
+  # has_secure_password will catch the nil pw while creating new users
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   # more cost means better encryption but on dev and test we just
   # need speed. This is how actually has_secure_password works

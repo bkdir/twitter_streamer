@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def login_required
-    redirect_to root_path if !logged_in?
+    unless logged_in?
+      store_url
+      flash[:danger] = "Please log in first"
+      redirect_to login_path 
+    end
   end
 end

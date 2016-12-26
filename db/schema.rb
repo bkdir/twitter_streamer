@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161224221301) do
+ActiveRecord::Schema.define(version: 20161226001100) do
 
   create_table "tweets", force: :cascade do |t|
-    t.integer  "user_id",     limit: 8,   null: false
-    t.integer  "tweet_id",    limit: 8,   null: false
-    t.string   "screen_name", limit: 20
-    t.string   "text",        limit: 140, null: false
+    t.integer  "user_id",     limit: 8, null: false
+    t.integer  "tweet_id",    limit: 8, null: false
+    t.string   "screen_name"
+    t.text     "text",                  null: false
     t.boolean  "deleted"
-    t.datetime "tweeted_at",              null: false
+    t.datetime "tweeted_at",            null: false
     t.datetime "deleted_at"
     t.index ["deleted"], name: "index_tweets_on_deleted"
     t.index ["tweet_id"], name: "index_tweets_on_tweet_id"
@@ -29,8 +29,9 @@ ActiveRecord::Schema.define(version: 20161224221301) do
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "admin",           default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
   end
