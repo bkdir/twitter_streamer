@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 20161224211350) do
 
   create_table "tweets", force: :cascade do |t|
-    t.string   "user_id",     limit: 8, null: false
-    t.string   "tweet_id",    limit: 8, null: false
+    t.string   "user_id",               null: false
+    t.string   "tweet_id",              null: false
     t.string   "screen_name"
     t.string   "name"
     t.text     "text",                  null: false

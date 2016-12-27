@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase) || NullUser.new
     if user.authenticate(params[:session][:password])
       login(user)
-      redirect_back_or(users_path)
+      redirect_back_or(twitter_users_path)
     else
       flash.now[:danger] = "Invalid username/password combination"
       render 'new'
