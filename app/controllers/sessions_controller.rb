@@ -1,14 +1,13 @@
 class SessionsController < ApplicationController
   skip_before_action :login_required, :only => [:new, :create]
-  # TODO: users_path should actually be twitter->following page
-  #
+
   def new
     # FIXME
-    redirect_to users_path if logged_in?
+    redirect_to twitter_users_path if logged_in?
   end
 
   def create
-    user = User.find_by(name: params[:session][:name].downcase) || NullUser.new
+    user = User.find_by(email: params[:session][:email].downcase) || NullUser.new
     if user.authenticate(params[:session][:password])
       login(user)
       redirect_back_or(users_path)

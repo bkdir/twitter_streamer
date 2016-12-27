@@ -39,7 +39,7 @@ class UserEditTest < ActionDispatch::IntegrationTest
     assert_redirected_to users_path
     @user.reload
     # FIXME
-    assert_equal name.downcase, @user.name
+    assert_equal name, @user.name
     assert_equal email, @user.email
   end
 

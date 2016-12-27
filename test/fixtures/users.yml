@@ -16,7 +16,7 @@ test:
   email: hands@example.gov
   password_digest: <%= User.digest('password') %>
 
-<% 20.times do |n| %>
+<% 30.times do |n| %>
 testuser<%= n %>:
   name:  <%= "User#{n}" %>
   email: <%= "user#{n}@test.com" %>

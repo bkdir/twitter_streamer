@@ -12,7 +12,7 @@ class ActiveSupport::TestCase
   def login_test_user(user, password: 'password')
     post login_path, params: {
       session: {
-        name: user.name,
+        email: user.email,
         password: password 
       }
     }

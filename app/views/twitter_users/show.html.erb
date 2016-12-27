@@ -1,0 +1,19 @@
+<% provide(:title, "Twitter Users") %>
+<h2 class="center">Twitter Users</h2>
+
+<div class="row">
+  <div class="col-lg-10 col-lg-offset-1">
+  <h1>TwitterUsers#show</h1>
+    <div class="users list-group">
+      <div class="list-group-item">
+        <h4 class="list-group-item-heading"><%= @user[:name] %></h4>
+        <p class="list-group-item-text"><%= @user[:screen_name] %></p>
+        <p class="list-group-item-text"><%= @user[:followers_count] %></p>
+        <p class="list-group-item-text"><%= @user[:friends_count] %></p>
+        <p class="list-group-item-text">
+          <%= image_tag( @user[:profile_image_url], size: 32 )%>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

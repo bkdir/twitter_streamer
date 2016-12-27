@@ -11,16 +11,16 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   test "logged in users should not see the login page" do
     get login_path
     assert_template "sessions/new"
-    post login_path, params: { session: {name: @user.name, password: 'password' } }
+    post login_path, params: { session: {email: @user.email, password: 'password' } }
     assert is_logged_in?
     get login_path
-    assert_redirected_to users_url
+    assert_redirected_to twitter_users_url
   end
 
   test "login with invalid information" do
     get login_path
     assert_template "sessions/new"
-    post login_path, params: { session: {name: "", password: "" } }
+    post login_path, params: { session: {email: "", password: "" } }
     assert_template "sessions/new"
     assert_not flash.empty?
     get root_path
@@ -30,7 +30,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   test "login with valid information and then logut" do
     get login_path
     assert_template "sessions/new"
-    post login_path, params: { session: {name: @user.name, password: 'password' } }
+    post login_path, params: { session: {email: @user.email, password: 'password' } }
     assert is_logged_in?
     assert_redirected_to users_path
     follow_redirect!

@@ -1,0 +1,22 @@
+<% tweets.each do |tweet| %>
+<div class="row list-group-item">
+  <div class="row">
+    <h4 class="list-group-item-heading">
+      <%= link_to tweet.name, 
+        "https://twitter.com/#{tweet.screen_name}", target: "_blank" %> 
+      <small class="list-group-item-text"> @<%= tweet.screen_name %> </small>
+    </h4>
+  </div>
+  <div class="row">
+    <p class="list-group-item-text small">
+      <%= tweet.text %>
+    </p>
+  </div>
+  <div class="row">
+    <p class="list-group-item-text small">
+      Deleted at: <%= tweet.deleted_at %> | 
+      Tweeted at: <%= tweet.tweeted_at %>
+    </p>
+  </div>
+</div>
+<% end %>

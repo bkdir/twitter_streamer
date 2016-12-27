@@ -4,8 +4,8 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in? %>
-          <li><%= link_to "Watch List", '#' %></il>
-          <li><%= link_to "Deleted Twits", '#' %></il>
+          <li><%= link_to "Watch List", twitter_users_path %></il>
+          <li><%= link_to "Deleted Twits", deleted_tweets_path %></il>
           <li><%= link_to "Users", users_path %></il>
           <li><%= link_to "Add User", add_user_path %></il>
           <li class="dropdown">

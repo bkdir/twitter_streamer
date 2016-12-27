@@ -8,6 +8,7 @@ class Tweet < ApplicationRecord
   class << self
     def save(tweet)
       my_attrs = parse_attributes(tweet.attrs)
+
       begin
         tweet = Tweet.new(my_attrs)
       rescue ActiveModel::ForbiddenAttributesError => exception
@@ -31,10 +32,16 @@ class Tweet < ApplicationRecord
 
     def update_deleted(tweet)
       begin
-        Tweet.find_by(tweet_id: tweet.id).update({
-          deleted: true,
-          deleted_at: Time.now
-        })
+        # saving tweet ids as strings since Twitter's ids are huuge
+        saved_tweet = Tweet.find_by(tweet_id: tweet.attrs[:id_str])
+        if saved_tweet
+          saved_tweet.update({ deleted: true, deleted_at: Time.now })
+        else
+          # maybe an old one, we just don't have it.. Save with a placeholder.
+          Tweet.create!(tweet_id: tweet.attrs[:id_str], user_id: tweet.attrs[:user_id_str],
+                        text: "--- No Tweet Info. Possibly an old tweet has been deleted ---",
+                        deleted: true, deleted_at: Time.now, tweeted_at: Time.now)
+        end
       rescue ActiveRecord::ActiveRecordError => exception
         # TODO: send -mail, maybe
         logger.fatal "Unable to update the tweet<#{tweet.id}> as Deleted!"
@@ -43,7 +50,7 @@ class Tweet < ApplicationRecord
     end
 
     def deleted_tweets
-      Tweet.where("deleted = ?", true).order(deleted_at: :desc) || NullTweet.new
+      Tweet.where({deleted: true}).order(deleted_at: :desc) || [NullTweet.new]
     end
 
     def parse_attributes(attrs)
@@ -54,9 +61,10 @@ class Tweet < ApplicationRecord
          return h
       end
 
-      h[:user_id]     = attrs.fetch(:user, {}).fetch(:id, nil)
-      h[:tweet_id]    = attrs[:id]
+      h[:user_id]     = attrs.fetch(:user, {}).fetch(:id_str, nil)
+      h[:tweet_id]    = attrs[:id_str]
       h[:screen_name] = attrs.fetch(:user, {}).fetch(:screen_name, nil)
+      h[:name] = attrs.fetch(:user, {}).fetch(:name, nil)
       h[:text]        = attrs[:text]
       h[:tweeted_at]  = attrs[:created_at]
       return h

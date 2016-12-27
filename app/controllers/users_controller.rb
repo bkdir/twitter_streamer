@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   
   def index
     @users = User.order(created_at: :desc)
-      .paginate(page: params[:page], per_page: 20) || [NullUser.new]
+      .paginate(page: params[:page], per_page: 30) || [NullUser.new]
   end
   
   def create

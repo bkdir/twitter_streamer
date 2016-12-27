@@ -3,6 +3,7 @@ class TweetHandler
   class << self
     def on_delete(tweet)
       msg = "A Tweet Has Been Deleted by UserID: #{tweet.user_id} - TweetID: #{tweet.id}"
+      msg += "Object: #{tweet.attrs}"
       Rails.logger.info(msg)
 
       Tweet.update_deleted(tweet)

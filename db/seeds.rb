@@ -28,12 +28,13 @@ end
   user_id = (0..9).to_a.shuffle.join
   tweet_id = (0..9).to_a.shuffle.join
   screen_name = Faker::Name.name
+  name = Faker::Name.name
   text = Faker::Lorem.sentence[0..140]
-  Tweet.create!(user_id: user_id, tweet_id: tweet_id, screen_name: screen_name, text: text, tweeted_at: Time.now)
+  Tweet.create!(user_id: user_id, tweet_id: tweet_id, screen_name: screen_name, name: name, text: text, tweeted_at: Time.now)
 end
 
 # Update some of the tweets as deleted
-Tweet.limit(30).each do |tweet|
+Tweet.limit(40).each do |tweet|
   tweet.update_attributes(deleted: true, deleted_at: Time.now)
 end
 

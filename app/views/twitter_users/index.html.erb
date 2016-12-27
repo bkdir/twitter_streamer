@@ -1,11 +1,11 @@
-<% provide(:title, "Authenticated Users") %>
-<h2 class="center">Authenticated Users</h2>
+<% provide(:title, "Twitter Users") %>
+<h2 class="center">Twitter Users</h2>
 
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2">
     <%= will_paginate %>
     <div class="users list-group">
-        <%= render 'users', users: @users %> 
+        <%= render 'twitter_users', users: @twitter_users %> 
     </div>
     <%= will_paginate %>
   </div>

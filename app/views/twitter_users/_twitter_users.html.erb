@@ -1,0 +1,27 @@
+<% users.each do |user| %>
+<div class="row list-group-item">
+  <div class="col-lg-2">
+    <%= image_tag( bigger_image(user[:profile_image_url]), 
+                  class: "img-rounded img-thumbnail img-responsive pull-right", size: 73 )%>
+  </div>
+  <div class="col-lg-10 twitter_user_info">
+    <div class="row">
+      <div class="col-lg-6">
+        <h4 class="list-group-item-heading">
+          <%= link_to user[:name], 
+            "https://twitter.com/#{user[:screen_name]}", target: "_blank" %> 
+          <small class="list-group-item-text">
+            @<%= user[:screen_name] %>
+          </small>
+        </h4>
+      </div>
+      <div class="col-lg-8">
+        <p class="list-group-item-text small">
+          Following: <%= user[:followers_count] %> | 
+          Followers: <%= user[:friends_count] %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
