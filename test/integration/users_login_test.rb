@@ -39,7 +39,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", logout_path
     assert_select "a[href=?]", add_user_path
     assert_select "a", "Watch List"
-    assert_select "a", "Deleted Twits"
+    assert_select "a", "Deleted Tweets"
     delete logout_path
     assert_not is_logged_in?
     assert_redirected_to root_url
