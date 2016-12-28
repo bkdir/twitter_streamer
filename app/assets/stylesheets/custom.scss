@@ -16,11 +16,9 @@ body {
 }
 
 #logo {
-  float: left;
   font-size: 1.8em;
   color: white;
   letter-spacing: -1px;
-  padding-top: 8px;
   font-weight: bold;
   &:hover{
     color: white;
@@ -72,5 +70,22 @@ input {
   padding: 0px !important;
   p {
     color: #9d9d9d;
+  }
+}
+
+.user_info {
+  padding: 25px;
+  p {
+    color: #9d9d9d;
+  }
+}
+
+.tweet_info {
+  padding: 20px;
+  p {
+    margin-top: 3px;
+    span {
+      color: #9d9d9d;
+    }
   }
 }

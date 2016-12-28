@@ -67,6 +67,15 @@ class Tweet < ApplicationRecord
       h[:name] = attrs.fetch(:user, {}).fetch(:name, nil)
       h[:text]        = attrs[:text]
       h[:tweeted_at]  = attrs[:created_at]
+
+      # additional stuff  :id=>813954516479578113
+      #  If you retweeted something, original text of that tweet is here: 
+      #h[:text] = attrs[:quoted_status][:extended_tweet][:full_text]
+      # all the media info is under:
+      # entities[:media] yada extended_entities[:media]
+      # sanirim sadece retweet edersen => retweeted_status eger yazi da yazarsan quoted_status
+      # quoted_status un de user i var. full_text sadece burada var.
+      # retweeted_status un de user ve text i var. NEyi retweet ettiysen o user ise kimi retweet ettigin
       return h
     end
   end

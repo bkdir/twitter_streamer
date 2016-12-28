@@ -53,8 +53,9 @@ class UsersController < ApplicationController
     end
 
     def correct_user
+      # Admin can edit anyone, for now.
       @user = User.find(params[:id])
-      redirect_to users_path unless current_user?(@user)
+      redirect_to users_path if (!current_user?(@user) && !current_user.admin)
     end
 
     def admin_user

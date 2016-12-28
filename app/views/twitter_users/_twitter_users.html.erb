@@ -1,27 +1,42 @@
-<% users.each do |user| %>
-<div class="row list-group-item">
-  <div class="col-lg-2">
-    <%= image_tag( bigger_image(user[:profile_image_url]), 
-                  class: "img-rounded img-thumbnail img-responsive pull-right", size: 73 )%>
-  </div>
-  <div class="col-lg-10 twitter_user_info">
-    <div class="row">
-      <div class="col-lg-6">
-        <h4 class="list-group-item-heading">
-          <%= link_to user[:name], 
-            "https://twitter.com/#{user[:screen_name]}", target: "_blank" %> 
-          <small class="list-group-item-text">
-            @<%= user[:screen_name] %>
-          </small>
-        </h4>
-      </div>
-      <div class="col-lg-8">
-        <p class="list-group-item-text small">
-          Following: <%= user[:followers_count] %> | 
-          Followers: <%= user[:friends_count] %>
-        </p>
-      </div>
+<% twitter_users.each do |user| %>
+  <div class="row list-group-item">
+    <!-- Image -->
+    <div class="col-lg-2 col-md-2 col-sm-3">
+      <%= image_tag( bigger_image(user[:profile_image_url]), 
+                    class: "img-rounded img-thumbnail img-responsive pull-right", 
+                    size: 73 )%>
     </div>
+
+    <!-- Twitter User Info -->
+    <div class="col-lg-10 col-md-10 col-sm-9 twitter_user_info">
+      <div class="row">
+        <!-- Username - Screen Name -->
+        <div class="col-lg-10">
+          <h4 class="list-group-item-heading">
+            <%= link_to user[:name], 
+              "https://twitter.com/#{user[:screen_name]}", target: "_blank" %> 
+            <small class="list-group-item-text">
+              @<%= user[:screen_name] %>
+            </small>
+          </h4>
+        </div>
+
+        <!-- Follwer/Following count -->
+        <div class="col-lg-10 col-md-10 col-sm-9">
+          <p class="list-group-item-text small">
+            Following: <%= user[:followers_count] %> | 
+            Followers: <%= user[:friends_count] %>
+          </p>
+        </div>
+
+        <!-- Badges -->
+        <div class="col-lg-2 col-md-2 col-sm-2 vcenter">
+          <span class="badge alert-success">0</span>
+          <span class="badge alert-danger">1</span>
+        </div>
+
+      </div><!-- END row -->
+    </div> <!-- END Twitter User Info -->
+
   </div>
-</div>
 <% end %>
