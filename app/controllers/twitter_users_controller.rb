@@ -1,9 +1,6 @@
 require 'twitter_client'
 require 'will_paginate/array'
 
-# TODO: figure out how to handle more than 100 users.
-# -> compare users' ids and grab missing ones only
-# -> eac_slice gibi bir method?
 # TODO: Consider storing users in db
 class TwitterUsersController < ApplicationController
 
@@ -30,13 +27,12 @@ class TwitterUsersController < ApplicationController
       result = []
       users.each do |user|
         h = {}
-        attrs = user.attrs
-        h[:id]                = attrs[:id]
-        h[:name]              = attrs[:name]
-        h[:screen_name]       = attrs[:screen_name]
-        h[:followers_count]   = attrs[:followers_count]
-        h[:friends_count]     = attrs[:friends_count]
-        h[:profile_image_url] = attrs[:profile_image_url]
+        h[:id]                = user.id
+        h[:name]              = user.name
+        h[:screen_name]       = user.screen_name
+        h[:followers_count]   = user.followers_count
+        h[:friends_count]     = user.friends_count
+        h[:profile_image_url] = user.profile_image_url.to_s
         result << h
       end
       return result

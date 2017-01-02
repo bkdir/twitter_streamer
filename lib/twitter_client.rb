@@ -14,8 +14,4 @@ class TwitterClient < Twitter::REST::Client
     @@client
   end
 
-  private
-    def new
-      super
-    end
 end

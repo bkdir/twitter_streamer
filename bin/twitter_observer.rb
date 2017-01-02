@@ -11,7 +11,7 @@ $streamer = Twitter::Streaming::Client.new do |config|
 end
 
 def observe_twitter
-  $streamer.user do |object|
+  $streamer.user({stall_warnings: "1"}) do |object|
     case object
     when Twitter::Tweet
       TweetHandler.on_post(object)
