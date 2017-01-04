@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170102014918) do
+ActiveRecord::Schema.define(version: 20170104035144) do
 
   create_table "media", force: :cascade do |t|
     t.string   "media_id",   null: false
     t.string   "tweet_id",   null: false
-    t.string   "user_id",    null: false
     t.boolean  "rt_media"
     t.string   "media_url",  null: false
     t.string   "media_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["media_id", "tweet_id"], name: "index_media_on_media_id_and_tweet_id", unique: true
     t.index ["media_id"], name: "index_media_on_media_id"
   end
 

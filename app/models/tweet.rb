@@ -1,11 +1,7 @@
 class Tweet < ApplicationRecord
   has_many :media, 
-           foreign_key: :tweet_id, primary_key: :tweet_id
-
-  has_many :retweeted_media, 
-            class_name: "Medium", 
-            foreign_key: :tweet_id, 
-            primary_key: :rt_id
+           foreign_key: :tweet_id, 
+           primary_key: :tweet_id
 
   validates :tweet_id,   presence: :true
   validates :user_id,    presence: true

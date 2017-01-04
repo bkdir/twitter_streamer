@@ -5,15 +5,15 @@ class Medium < ApplicationRecord
              optional: true
 
   validates :tweet_id,  presence: :true
-  validates :user_id,   presence: :true
   validates :media_url, presence: :true
+  validates :media_id,  presence: :true
+  validates :media_id, uniqueness: {scope: :tweet_id} 
   
-  def self.save_media(media, tweet_id, user_id, retweeted_media = false)
+  def self.save_media(media, tweet_id, retweeted_media = false)
     media.each do |m| 
       begin
         Medium.new do |medium|
           medium.media_id   = m.id.to_s
-          medium.user_id    = user_id
           medium.tweet_id   = tweet_id
           medium.rt_media   = retweeted_media
           medium.media_url  = m.media_url.to_s
