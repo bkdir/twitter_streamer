@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170104035144) do
+ActiveRecord::Schema.define(version: 20170105032952) do
 
   create_table "media", force: :cascade do |t|
     t.string   "media_id",   null: false
@@ -25,14 +25,14 @@ ActiveRecord::Schema.define(version: 20170104035144) do
   end
 
   create_table "tweets", force: :cascade do |t|
-    t.string   "user_id",     null: false
-    t.string   "tweet_id",    null: false
+    t.string   "user_id",                     null: false
+    t.string   "tweet_id",                    null: false
     t.string   "screen_name"
     t.string   "name"
-    t.text     "text",        null: false
+    t.text     "text",                        null: false
     t.string   "rt_id"
     t.text     "quoted_text"
-    t.boolean  "deleted"
+    t.boolean  "deleted",     default: false
     t.datetime "tweeted_at"
     t.datetime "deleted_at"
     t.index ["deleted"], name: "index_tweets_on_deleted"

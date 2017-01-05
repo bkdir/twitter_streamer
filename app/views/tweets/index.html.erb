@@ -1,12 +1,14 @@
 <% provide(:title, "Deleted Tweets") %>
-<h2 class="center">Deleted Tweets</h2>
+<h2 class="center header">Deleted Tweets</h2>
 
 <div class="row">
-  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-    <div class="row"><%= will_paginate %></div>
-    <div class="users list-group">
-        <%= render 'tweets', tweets: @tweets %> 
+  <div class="container">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-xs-12">
+      <div class="row"><%= will_paginate %></div>
+      <div class="users list-group">
+          <%= render 'tweets', tweets: @tweets %> 
+      </div>
+      <div class="row"><%= will_paginate %></div>
     </div>
-    <div class="row"><%= will_paginate %></div>
   </div>
 </div>

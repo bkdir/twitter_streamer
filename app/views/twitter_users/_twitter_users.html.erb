@@ -11,7 +11,7 @@
     <div class="col-lg-10 col-md-10 col-sm-9 twitter_user_info">
       <div class="row">
         <!-- Username - Screen Name -->
-        <div class="col-lg-10">
+        <div class="col-lg-12">
           <h4 class="list-group-item-heading">
             <%= link_to user[:name], 
               "https://twitter.com/#{user[:screen_name]}", target: "_blank" %> 
@@ -22,17 +22,22 @@
         </div>
 
         <!-- Follwer/Following count -->
-        <div class="col-lg-10 col-md-10 col-sm-9">
-          <p class="list-group-item-text small">
+        <div class="col-lg-8 col-md-10 col-sm-9">
+          <p class="list-group-item-text">
             Followers: <%= user[:followers_count] %> | 
             Following: <%= user[:friends_count] %>
           </p>
         </div>
 
         <!-- Badges -->
-        <div class="col-lg-2 col-md-2 col-sm-2 vcenter">
-          <span class="badge alert-success">0</span>
-          <span class="badge alert-danger">1</span>
+        <div class="col-lg-4 col-md-2 col-sm-2 vcenter">
+          <p class="list-group-item-text">
+          <%= link_to twitter_user_path(user[:id]) do %>
+            <span>Deleted </span>
+            <span class="badge alert-danger"><%= deleted_tweet_count(user) %></span>
+          <% end %>
+          <a href="#"><span>Tweeted </span><span class="badge alert-success"><%= recent_tweet_count(user) %></span></a>
+          </p>
         </div>
 
       </div><!-- END row -->

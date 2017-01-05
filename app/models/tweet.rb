@@ -8,6 +8,14 @@ class Tweet < ApplicationRecord
   validates :text,       presence: true
   validates :tweeted_at, presence: true
 
+  def is_retweet?
+    !rt_id.nil?
+  end
+
+  def is_quote?
+    !quoted_text.nil?
+  end
+
   class << self
 
     def deleted_tweets

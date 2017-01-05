@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   delete '/delete_tweet', to: 'tweets#destroy'
 
   get '/twitter_users', to: 'twitter_users#index'
-  #TODO: :id? format? 
-  get 'twitter_users/show'
+  get '/twitter_users/:id', to: 'twitter_users#show', as: 'twitter_user'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'sessions#new'

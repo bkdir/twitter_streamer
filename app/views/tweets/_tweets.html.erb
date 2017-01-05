@@ -2,18 +2,52 @@
 <div class="row list-group-item tweet_info">
   <h4 class="list-group-item-heading">
     <%= link_to tweet.name, 
-      "https://twitter.com/#{tweet.screen_name}", target: "_blank" %> 
-    <small class="list-group-item-text"> @<%= tweet.screen_name %> </small>
+      "https://twitter.com/#{tweet.screen_name}", target: "_blank" 
+    %> 
+    <small class="list-group-item-text"> 
+      @<%= tweet.screen_name %>
+    </small>
   </h4>
-
   
   <p class="list-group-item-text text-danger">
-    <%= tweet.text.gsub(/(https?:\/\/\S+)/, "#{link_to '\1', '\1', target: "_blank"}" ).html_safe%>
+    <%= tweet.text.gsub(/(https?:\/\/\S+)/, 
+      "#{link_to '\1', '\1', target: "_blank"}" ).html_safe %>
   </p>
 
+  <% if tweet.is_quote? %>
+    <blockquote class="blockquote list-group-item-text">
+      <p class="mb-0">Quoted: 
+        <em>
+        <%= tweet.quoted_text.gsub(/(https?:\/\/\S+)/, 
+          "#{link_to '\1', '\1', target: "_blank"}" ).html_safe %>
+        </em>
+      </p>
+    </blockquote>
+  <% end %>
+	<ul class="list-group-item-text list-inline small">
+    <li><span class="label label-info">
+          <%= tweet.is_retweet? ? "Retweet" : "Tweet" %>
+        </span>
+    </li>
+    <li><span class="">Media: <%= tweet.media.count %></span></li>
+    <% if source = get_tweet_source(tweet) %>	
+      <li><span class="">
+            Source: <%= link_to 'tweet status', source , 
+              target: "_blank", class: "underlined" %>
+          </span>
+      </li>
+    <% else %>
+      <li class="gray"><span class="">Source: Unavailable</span></li>
+    <% end %>
+  </ul>
+
   <p class="list-group-item-text small">
-    <span>Deleted at: <%= tweet.deleted_at.strftime("%m/%d/%Y %H:%M:%S") %> |</span>  
-    <span>Tweeted at: <%= tweet.tweeted_at.strftime("%m/%d/%Y %H:%M:%S") %></span>
+    <span class="gray">
+      Deleted at: <%= tweet.deleted_at.strftime("%m/%d/%Y %H:%M:%S") %> |
+    </span>  
+    <span class="gray">
+      Tweeted at: <%= tweet.tweeted_at.strftime("%m/%d/%Y %H:%M:%S") %>
+    </span>
   </p>
 </div>
 <% end %>
