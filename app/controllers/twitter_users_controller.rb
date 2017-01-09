@@ -9,7 +9,14 @@ class TwitterUsersController < ApplicationController
   end
 
   def show
-    @user = parse_user_info(TwitterClient.client.user(params[:id].to_i))
+    begin
+      @user = parse_user_info(TwitterClient.client.user(params[:id].to_i))
+    rescue Twitter::Error::NotFound => error
+      Rails.logger.info "Unable to find user. Message: #{error.message}"
+      flash[:danger] = "Unable to find user. UserID: params[:id]"
+      redirect_to 'index'
+      return
+    end
     @deleted_tweets = Tweet.where({
       user_id: @user[:id],
       deleted: true
