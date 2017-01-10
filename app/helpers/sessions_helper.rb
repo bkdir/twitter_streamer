@@ -2,6 +2,7 @@ module SessionsHelper
 
   def login(user)
     session[:user_id] = user.id
+    user.update_attribute(:last_login, Time.now)
   end
   
   def current_user

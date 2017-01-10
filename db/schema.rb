@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170105032952) do
+ActiveRecord::Schema.define(version: 20170110050506) do
 
   create_table "media", force: :cascade do |t|
     t.string   "media_id",   null: false
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20170105032952) do
     t.boolean  "admin",           default: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.datetime "last_login"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
   end

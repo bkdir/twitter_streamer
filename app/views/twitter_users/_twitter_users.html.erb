@@ -22,7 +22,7 @@
         </div>
 
         <!-- Follwer/Following count -->
-        <div class="col-lg-8 col-md-10 col-sm-9">
+        <div class="col-lg-8 col-md-8 col-sm-7">
           <p class="list-group-item-text">
             Followers: <%= user[:followers_count] %> | 
             Following: <%= user[:friends_count] %>
@@ -30,13 +30,13 @@
         </div>
 
         <!-- Badges -->
-        <div class="col-lg-4 col-md-2 col-sm-2 vcenter">
+        <div class="col-lg-4 col-md-4 col-sm-5 vcenter">
           <p class="list-group-item-text">
           <%= link_to twitter_user_path(user[:id]) do %>
             <span>Deleted </span>
             <span class="badge alert-danger"><%= deleted_tweet_count(user) %></span>
           <% end %>
-          <a href="#"><span>Tweeted </span><span class="badge alert-success"><%= recent_tweet_count(user) %></span></a>
+          <span>/ Tweeted </span><span class="badge alert-success"><%= recent_tweet_count(user) %></span>
           </p>
         </div>
 

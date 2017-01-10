@@ -3,28 +3,28 @@
   <div class= "col-lg-10 col-lg-offset-1">
     <div class="row">
 
-      <div class="col-lg-4">
+      <div class="col-lg-4 col-md-4 col-sm-4">
         <div class="row">
-          <p class="">
+          <p class="list-group-item-text">
             <%= image_tag( original_image(@user[:profile_image_url]),
                    class: "img-rounded img-thumbnail img-responsive",
                    size: 200)%>
          </p>
-         <h3>
+         <h3 class="">
             <%= link_to @user[:name], 
               "https://twitter.com/#{@user[:screen_name]}", target: "_blank" %> 
               <small class="">@<%= @user[:screen_name] %></small>
          </h3>
 
-        <!-- Follwer/Following count -->
-        <p class="list-group-item-text">Followers: <%= @user[:followers_count] %></p>
-        <p class="list-group-item-text">Following: <%= @user[:friends_count] %></p>
-        <p class="list-group-item-text">Deleted Tweets: <%= @deleted_tweets.size %></p>
-        <p class="list-group-item-text">Last Tweeted at: <%= last_tweeted_date_of(@user) %></p>
+            <!-- Follwer/Following count -->
+            <p class="list-group-item-text">Followers: <%= @user[:followers_count] %></p>
+            <p class="list-group-item-text">Following: <%= @user[:friends_count] %></p>
+            <p class="list-group-item-text">Deleted Tweets: <%= @deleted_tweets.size %></p>
+            <p class="list-group-item-text">Last Tweeted at: <%= last_tweeted_date_of(@user) %></p>
         </div>
       </div><!--4-->
 
-      <div class="col-lg-8">
+      <div class="col-lg-8 col-md-8 col-sm-8">
         <div class="row">
           <div class="col-lg-12">
             <div class="list-group">
