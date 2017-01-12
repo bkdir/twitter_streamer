@@ -34,8 +34,8 @@
           <p class="list-group-item-text">
           <%= link_to twitter_user_path(user[:id]) do %>
             <span>Deleted </span>
-            <span class="badge alert-danger"><%= deleted_tweet_count(user) %></span>
           <% end %>
+          <span class="badge alert-danger"><%= deleted_tweet_count(user) %></span>
           <span>/ Tweeted </span><span class="badge alert-success"><%= recent_tweet_count(user) %></span>
           </p>
         </div>

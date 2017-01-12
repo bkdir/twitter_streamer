@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110050506) do
+ActiveRecord::Schema.define(version: 20170112024353) do
 
   create_table "media", force: :cascade do |t|
     t.string   "media_id",   null: false
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20170110050506) do
     t.string   "tweet_id",                    null: false
     t.string   "screen_name"
     t.string   "name"
-    t.text     "text",                        null: false
+    t.text     "text"
     t.string   "rt_id"
     t.text     "quoted_text"
     t.boolean  "deleted",     default: false

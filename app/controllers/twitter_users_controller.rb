@@ -17,10 +17,10 @@ class TwitterUsersController < ApplicationController
       redirect_to 'index'
       return
     end
-    @deleted_tweets = Tweet.where({
-      user_id: @user[:id],
-      deleted: true
-    }).order(deleted_at: :desc)
+
+    @deleted_tweets = Tweet.where(
+      "user_id = ? and deleted = ? and text is not null", @user[:id], true)
+    .order(deleted_at: :desc).paginate(page: params[:page], per_page: 20)
   end
   
   private
@@ -32,7 +32,7 @@ class TwitterUsersController < ApplicationController
       result = []
       users.each do |user|
         h = {}
-        h[:id]                = user.id
+        h[:id]                = user.id.to_s
         h[:name]              = user.name
         h[:screen_name]       = user.screen_name
         h[:followers_count]   = user.followers_count

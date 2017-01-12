@@ -5,7 +5,6 @@ class Tweet < ApplicationRecord
 
   validates :tweet_id,   presence: :true
   validates :user_id,    presence: true
-  validates :text,       presence: true
   validates :tweeted_at, presence: true
 
   def is_retweet?
@@ -19,7 +18,7 @@ class Tweet < ApplicationRecord
   class << self
 
     def deleted_tweets
-      Tweet.where({deleted: true}).order(deleted_at: :desc) || [NullTweet.new]
+      Tweet.where("deleted = ? and text is not null", true).order(deleted_at: :desc) || [NullTweet.new]
     end
 
     def update_deleted(tweet)
@@ -29,11 +28,9 @@ class Tweet < ApplicationRecord
         if saved_tweet
           saved_tweet.update({ deleted: true, deleted_at: Time.now })
         else
-          # maybe an old one, we just don't have it.. Save with a placeholder.
-          text = "--- No Tweet Info. Possibly an old tweet has been deleted ---"
+          # maybe an old one, we just don't have it. Save for the record
           Tweet.create!(tweet_id: tweet.attrs[:id_str], 
                         user_id: tweet.attrs[:user_id_str],
-                        text: text,
                         deleted: true, 
                         deleted_at: Time.now, 
                         tweeted_at: Time.now)
@@ -57,7 +54,6 @@ class Tweet < ApplicationRecord
       begin
         tweet.save!
       rescue ActiveRecord::ActiveRecordError => exception
-        # TODO: do something
         logger.fatal "Failed to save the Tweet: #{tweet.inspect}"
         logger.fatal "Message: #{exception.message}"
       end

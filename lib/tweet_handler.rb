@@ -5,18 +5,18 @@ module TweetHandler
 
   class << self
     def on_delete(tweet)
-      msg = "Deleted tweet: UserID: #{tweet.user_id} - TweetID: #{tweet.id}"
-      puts msg
+      #msg = "Deleted tweet: UserID: #{tweet.user_id} - TweetID: #{tweet.id}"
+      #puts msg
 
       Tweet.update_deleted(tweet)
     end
 
     def on_post(tweet)
-      msg  = "New Tweet! User: #{tweet.user.name}/#{tweet.user.screen_name} "
-      msg += "UserID: #{tweet.user.id} - TweetID: #{tweet.id}\n"
-      msg += "Tweeted at: #{tweet.created_at}\n"
-      msg += "#{tweet.attrs}\n"
-      puts msg
+      #msg  = "New Tweet! User: #{tweet.user.name}/#{tweet.user.screen_name} "
+      #msg += "UserID: #{tweet.user.id} - TweetID: #{tweet.id}\n"
+      #msg += "Tweeted at: #{tweet.created_at}\n"
+      #msg += "#{tweet.attrs}\n"
+      #puts msg
 
       process_tweet(tweet)
     end
