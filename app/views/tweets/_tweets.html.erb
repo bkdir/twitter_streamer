@@ -1,6 +1,9 @@
 <% tweets.each do |tweet| %>
 <div class="row list-group-item tweet_info">
   <h4 class="list-group-item-heading">
+      <% if common_page %>
+        <%= link_to "#{fa_icon 'user-circle'}".html_safe, twitter_user_path(tweet.user_id)  %>
+      <% end %>
     <%= link_to tweet.name, 
       "https://twitter.com/#{tweet.screen_name}", target: "_blank" 
     %> 
@@ -29,11 +32,11 @@
           <%= tweet.is_retweet? ? "Retweet" : "Tweet" %>
         </span>
     </li>
-    <li><span class="">Media: <%= tweet.media.count %></span></li>
+    <li><span class=""><%= fa_icon 'camera' %> <%= tweet.media.count %></span></li>
     <% if source = get_tweet_source(tweet) %>	
       <li><span class="">
-            Source: <%= link_to 'tweet status', source , 
-              target: "_blank", class: "underlined" %>
+          <%= link_to "Source #{fa_icon 'external-link'}".html_safe, source , 
+              target: "_blank" %>
           </span>
       </li>
     <% else %>

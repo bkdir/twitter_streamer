@@ -11,16 +11,20 @@
                    size: 200)%>
          </p>
          <h3 class="">
-            <%= link_to @user[:name], 
+           <%= link_to "#{fa_icon 'twitter'}#{@user[:name]}".html_safe, 
               "https://twitter.com/#{@user[:screen_name]}", target: "_blank" %> 
               <small class="">@<%= @user[:screen_name] %></small>
          </h3>
 
             <!-- Follwer/Following count -->
-            <p class="list-group-item-text">Followers: <%= @user[:followers_count] %></p>
-            <p class="list-group-item-text">Following: <%= @user[:friends_count] %></p>
-            <p class="list-group-item-text">Deleted Tweets: <%= @deleted_tweets.size %></p>
-            <p class="list-group-item-text">Last Tweeted at: <%= last_tweeted_date_of(@user) %></p>
+            <p class="list-group-item-text">
+              Followers: <%= @user[:followers_count] %></p>
+            <p class="list-group-item-text">
+              Following: <%= @user[:friends_count] %></p>
+            <p class="list-group-item-text">
+              Deleted Tweets: <%= deleted_tweet_count(@user) %></p>
+            <p class="list-group-item-text">
+              Last Tweet: <%= last_tweeted_date_of(@user) %></p>
         </div>
       </div><!--4-->
 
@@ -30,10 +34,13 @@
             <div class="list-group">
 							<div href="#" class="list-group-item row">
 								<h4 class="list-group-item-heading center">
-                  Deleted Tweets
+                  <span data-toggle="tooltip" data-placement="top" title="Only tweets with content will be displayed">Deleted Tweets
+                    <%= fa_icon 'info-circle' %></span>
                 </h4>
 							</div>
-              <%= render 'tweets/tweets', tweets: @deleted_tweets %>
+              <div class="row"><%= will_paginate(@deleted_tweets) %></div>
+              <%= render 'tweets/tweets', common_page: false, tweets: @deleted_tweets %>
+              <div class="row"><%= will_paginate(@deleted_tweets) %></div>
             </div>
           </div>
         </div>
