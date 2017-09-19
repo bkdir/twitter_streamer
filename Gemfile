@@ -22,7 +22,6 @@ gem 'turbolinks', '5.0.1'  # Turbolinks makes navigating your web application fa
 
 group :development, :test do
   gem 'byebug',  '9.0.0', platform: :mri  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'sqlite3', '1.3.12'
 end
 
 group :development do
@@ -41,7 +40,7 @@ group :test do
     gem 'guard-minitest',           '2.4.4'
 end
 
-group :production do
+group :production, :development, :test do
   gem 'pg', '0.18.4'
 end
 
