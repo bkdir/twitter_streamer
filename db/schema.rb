@@ -10,10 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161222011447) do
+ActiveRecord::Schema.define(version: 20170922024236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "media", force: :cascade do |t|
+    t.bigint   "tweet_id",   null: false
+    t.string   "media_url",  null: false
+    t.string   "media_type"
+    t.datetime "created_at", null: false
+    t.index ["tweet_id", "media_type"], name: "index_media_on_tweet_id_and_media_type", using: :btree
+    t.index ["tweet_id"], name: "index_media_on_tweet_id", using: :btree
+  end
+
+  create_table "tweets", primary_key: "tweet_id", id: :bigint, force: :cascade do |t|
+    t.bigint   "user_id",                     null: false
+    t.text     "text"
+    t.text     "quoted_text"
+    t.bigint   "rt_id"
+    t.boolean  "deleted",     default: false
+    t.datetime "created_at"
+    t.datetime "deleted_at"
+    t.index ["user_id", "deleted"], name: "index_tweets_on_user_id_and_deleted", using: :btree
+  end
+
+  create_table "twitter_users", primary_key: "user_id", id: :bigint, force: :cascade do |t|
+    t.string   "screen_name"
+    t.string   "name"
+    t.integer  "deleted_tweets_count"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["screen_name"], name: "index_twitter_users_on_screen_name", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                            null: false
@@ -27,4 +56,6 @@ ActiveRecord::Schema.define(version: 20161222011447) do
     t.index ["name"], name: "index_users_on_name", unique: true, using: :btree
   end
 
+  add_foreign_key "media", "tweets", primary_key: "tweet_id"
+  add_foreign_key "tweets", "twitter_users", column: "user_id", primary_key: "user_id"
 end
