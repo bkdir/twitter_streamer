@@ -1,7 +1,6 @@
 require 'twitter_client'
 require 'will_paginate/array'
 
-# TODO: Consider storing users in db
 class TwitterUsersController < ApplicationController
 
   def index
@@ -43,23 +42,6 @@ class TwitterUsersController < ApplicationController
       return result
     end
 
-    def friend_ids_list_of(client)
-      begin
-        @friend_ids = client.friend_ids.to_a
-      rescue Twitter::Error::TooManyRequests => error
-        Rails.logger.info "Unable to get Twitter Users information '#{error.message}'"
-        flash.now[:danger] = "Twitter Rate Limit Exceeded. Unable to retreive" +
-                             "friends list at the moment."
-      end
-
-      @friend_ids || []
-    end
-    
-    def set_friend_ids_to_session(id_array)
-      session[:friend_ids] = id_array
-      session[:friend_ids_count] = id_array.count
-    end
-
     def twitter_users_list
       client = TwitterClient.client
 
@@ -71,5 +53,22 @@ class TwitterUsersController < ApplicationController
       users = client.users(session[:friend_ids]).unshift(client.user)
       parsed_users = parse_users_info(users)
       parsed_users.paginate(page: params[:page], per_page: 30)
+    end
+
+    def set_friend_ids_to_session(id_array)
+      session[:friend_ids] = id_array
+      session[:friend_ids_count] = id_array.count
+    end
+
+    def friend_ids_list_of(client)
+      begin
+        @friend_ids = client.friend_ids.to_a
+      rescue Twitter::Error::TooManyRequests => error
+        Rails.logger.info "Unable to get Twitter Users information '#{error.message}'"
+        flash.now[:danger] = "Twitter Rate Limit Exceeded. Unable to retreive" +
+                             "friends list at the moment."
+      end
+
+      @friend_ids || []
     end
 end

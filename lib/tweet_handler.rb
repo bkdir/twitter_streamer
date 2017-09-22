@@ -18,6 +18,7 @@ module TweetHandler
       #msg += "#{tweet.attrs}\n"
       #puts msg
 
+      TwitterUser.find_or_save_user(tweet.user)
       process_tweet(tweet)
     end
 
@@ -26,8 +27,6 @@ module TweetHandler
       msg += "Code: #{warning.code}, Percentage full: #{warning.percent_full}\n"
       msg += "Message: #{warning.message}"
       puts msg
-
-      # TODO: maybe send an e-mail? using delayed jobs?
     end
 
     def process_tweet(tweet)
@@ -35,8 +34,7 @@ module TweetHandler
       
       media = get_media(tweet)
       Medium.save_media(media, tweet.id.to_s,
-                       tweet.retweet? || tweet.quote? ) unless media.nil?
+                        tweet.retweet? || tweet.quote? ) unless media.nil?
     end
-  end # class << self
-
-end # TweetHandler
+  end
+end

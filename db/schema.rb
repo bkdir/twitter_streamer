@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170922024236) do
+ActiveRecord::Schema.define(version: 20170922051107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20170922024236) do
     t.bigint   "tweet_id",   null: false
     t.string   "media_url",  null: false
     t.string   "media_type"
-    t.datetime "created_at", null: false
+    t.datetime "created_at"
     t.index ["tweet_id", "media_type"], name: "index_media_on_tweet_id_and_media_type", using: :btree
     t.index ["tweet_id"], name: "index_media_on_tweet_id", using: :btree
   end

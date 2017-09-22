@@ -1,6 +1,7 @@
 module TweetUtils
 
   def get_args(tweet)
+    puts "get_args"
     args = get_common_args(tweet)
     if tweet.retweet?
       args.merge!(get_retweet_args(tweet.retweeted_status))
@@ -16,11 +17,9 @@ module TweetUtils
     h = {}
     user = tweet.user
 
-    h[:user_id]     = user.id.to_s
-    h[:tweet_id]    = tweet.id.to_s
-    h[:screen_name] = user.screen_name
-    h[:name]        = user.name 
-    h[:tweeted_at]  = tweet.created_at
+    h[:user_id]     = user.id
+    h[:tweet_id]    = tweet.id
+    h[:created_at]  = tweet.created_at
     h[:text]        = get_text(tweet)
     return h
   end

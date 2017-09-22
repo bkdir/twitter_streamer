@@ -16,9 +16,9 @@ module TwitterUsersHelper
   end
 
   def last_tweeted_date_of(user)
-    last_tweet = Tweet.where(user_id: user[:id]).order(:tweeted_at).last
+    last_tweet = Tweet.where(user_id: user[:id]) .order(:created_at).last
     if last_tweet.present?
-      "#{last_tweet.tweeted_at.to_formatted_s(:db)} #{last_tweet.tweeted_at.zone}"
+      "#{last_tweet.created_at.to_formatted_s(:db)} #{last_tweet.created_at.zone}"
     end
   end
 end

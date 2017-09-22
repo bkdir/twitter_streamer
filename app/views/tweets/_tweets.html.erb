@@ -4,11 +4,11 @@
       <% if common_page %>
         <%= link_to "#{fa_icon 'user-circle'}".html_safe, twitter_user_path(tweet.user_id)  %>
       <% end %>
-    <%= link_to tweet.name, 
-      "https://twitter.com/#{tweet.screen_name}", target: "_blank" 
+    <%= link_to tweet.user.name, 
+      "https://twitter.com/#{tweet.user.name}", target: "_blank" 
     %> 
     <small class="list-group-item-text"> 
-      @<%= tweet.screen_name %>
+      @<%= tweet.user.screen_name %>
     </small>
   </h4>
   
@@ -20,10 +20,8 @@
   <% if tweet.is_quote? %>
     <blockquote class="blockquote list-group-item-text">
       <p class="mb-0">Quoted: 
-        <em>
-        <%= tweet.quoted_text.gsub(/(https?:\/\/\S+)/, 
-          "#{link_to '\1', '\1', target: "_blank"}" ).html_safe %>
-        </em>
+        <em><%= tweet.quoted_text.gsub(/(https?:\/\/\S+)/, 
+          "#{link_to '\1', '\1', target: "_blank"}" ).html_safe %></em>
       </p>
     </blockquote>
   <% end %>
@@ -49,7 +47,7 @@
       Deleted at: <%= tweet.deleted_at.strftime("%m/%d/%Y %H:%M:%S") %> |
     </span>  
     <span class="gray">
-      Tweeted at: <%= tweet.tweeted_at.strftime("%m/%d/%Y %H:%M:%S") %>
+      Tweeted at: <%= tweet.created_at.strftime("%m/%d/%Y %H:%M:%S") %>
     </span>
   </p>
 </div>
