@@ -18,15 +18,15 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "index page as an admin user should display destroy links" do
+  test "index page as an admin user should display destroy links for other users" do
     login_test_user(@user)
     get users_path
     assert_template 'users/index'
     assert_select 'div.pagination'
-    users = User.paginate(page: 1, per_page: 20)
+    users = User.order(updated_at: :desc).paginate(page: 1, per_page: 30)
     users.each do |user|
       unless user == @user
-        assert_select 'a[href=?]', user_path(user), text: ''
+        assert_select 'a[href=?]', user_path(user)
       end
     end
   end
