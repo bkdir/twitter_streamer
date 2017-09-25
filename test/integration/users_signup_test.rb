@@ -20,6 +20,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
       }
     end
     assert_template "users/new"
+    assert_select 'div.error_explanation'
   end
 
   test "Sould save user upon valid signup submission" do
