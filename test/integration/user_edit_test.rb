@@ -21,9 +21,11 @@ class UserEditTest < ActionDispatch::IntegrationTest
     assert_template 'users/edit'
   end
 
-  test "Successful edit" do
-    login_test_user(@user)
+  test "Successful edit with friendly forwarding" do
     get edit_user_path(@user)
+    login_test_user(@user)
+    assert_redirected_to edit_user_url(@user)
+    follow_redirect!
     assert_template 'users/edit'
     name = "Jane"
     email = "test@example.com"

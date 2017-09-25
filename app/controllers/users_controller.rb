@@ -22,11 +22,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "Profile has been updated"
       redirect_to users_path
@@ -36,15 +34,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    #FIXME: mess..
-    user = User.find(params[:id])
-    if user.destroy
-      flash[:success] = "User has been deleted"
-      redirect_to users_url
-    else
-      flas.now[:alert] = "Unable to delete user: #{user.name}"
-      redirect_to users_url
-    end
+    User.find(params[:id]).destroy
+    flash[:success] = "User has been deleted."
+    redirect_to users_url
   end
 
   private
@@ -61,5 +53,4 @@ class UsersController < ApplicationController
     def admin_user
       redirect_to(users_url) unless current_user.admin?
     end
-
 end

@@ -53,7 +53,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to users_path
   end
 
-  test "admin attribute should not be editable via we" do
+  test "admin attribute should not be editable via the web" do
     login_test_user(@other_user)
     assert_not @other_user.admin?
     patch user_path(@other_user), params: {
@@ -63,7 +63,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         admin: 1
       }
     }
-
     assert_not @other_user.reload.admin?
   end
 
@@ -89,5 +88,4 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to users_url
   end
-
 end
