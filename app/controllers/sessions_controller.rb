@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase) || NullUser.new
     if user.authenticate(params[:session][:password])
       login(user)
+      remember(user)
       redirect_back_or(twitter_users_path)
     else
       flash.now[:danger] = "Invalid username/password combination"
@@ -18,7 +19,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    logout
+    logout if logged_in?
     redirect_to root_url
   end
 end
