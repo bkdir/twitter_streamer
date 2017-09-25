@@ -15,25 +15,33 @@ User.create!(
   admin: true
 )
 
-# Fake users:
-15.times do |i|
+# Fake Users:
+35.times do |i|
   name = Faker::Name.unique.name
   email = Faker::Internet.email
   password = "test12"
   User.create!(name: name, email: email, password: password, password_confirmation: password)
 end
 
+# Fake Twitter Users:
+35.times do |i|
+  user_id = (0..9).to_a.shuffle.join
+  name = Faker::Name.unique.name
+  screen_name = Faker::Name.unique.name
+  TwitterUser.create!(screen_name: screen_name, name: name, user_id: user_id)
+end
+
+user_ids = TwitterUser.all.pluck(:user_id)
+
 # Create fake tweets:
-#99.times do |i|
-#  user_id = (0..9).to_a.shuffle.join
-#  tweet_id = (0..9).to_a.shuffle.join
-#  screen_name = Faker::Name.name
-#  name = Faker::Name.name
-#  text = Faker::Lorem.sentence[0..140]
-#  Tweet.create!(user_id: user_id, tweet_id: tweet_id, screen_name: screen_name, name: name, text: text, tweeted_at: Time.now)
-#end
-#
-## Update some of the tweets as deleted
-#Tweet.limit(40).each do |tweet|
-#  tweet.update_attributes(deleted: true, deleted_at: Time.now)
-#end
+99.times do |i|
+  user_id = user_ids[rand(0..34)]
+  tweet_id = (0..9).to_a.shuffle.join
+  text = Faker::Lorem.sentence[0..140]
+  Tweet.create!(user_id: user_id, tweet_id: tweet_id, text: text, created_at: Time.now)
+end
+
+# Update some of the tweets as deleted
+Tweet.limit(40).each do |tweet|
+  tweet.update_attributes(deleted: true, deleted_at: Time.now)
+end
