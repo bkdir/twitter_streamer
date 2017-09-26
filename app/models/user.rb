@@ -1,13 +1,13 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token
+  attr_accessor :remember_token, :reset_token
 
   before_save { email.downcase! }
-  validates :name, presence: true, length: { maximum: 30 },
-    uniqueness: { case_sensitive: false }
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
     format: { with: VALID_EMAIL_REGEX },
+    uniqueness: { case_sensitive: false }
+  validates :name, presence: true, length: { maximum: 30 },
     uniqueness: { case_sensitive: false }
 
   has_secure_password
@@ -40,8 +40,23 @@ class User < ApplicationRecord
   end
   
   # Returns true if the given token matches the digest.
-  def authenticated?(remember_token)
-    return false if remember_digest.nil?
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  def authenticated?(attribute, token)
+    digest = self.send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
+  end
+   
+  def send_password_reset_email
+		UserMailer.password_reset(self).deliver_now
+  end 
+
+  def create_reset_digest
+    self.reset_token = User.new_token
+		update_columns(reset_digest: User.digest(reset_token), 
+                   reset_sent_at: Time.zone.now)
+  end
+
+  def password_reset_expired?
+		self.reset_sent_at < 2.hours.ago
   end
 end
