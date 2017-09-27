@@ -1,7 +1,6 @@
 module TweetUtils
 
   def get_args(tweet)
-    puts "get_args"
     args = get_common_args(tweet)
     if tweet.retweet?
       args.merge!(get_retweet_args(tweet.retweeted_status))

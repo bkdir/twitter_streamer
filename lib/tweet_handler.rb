@@ -26,7 +26,7 @@ module TweetHandler
       msg  = "Received A Stall Warning!\n"
       msg += "Code: #{warning.code}, Percentage full: #{warning.percent_full}\n"
       msg += "Message: #{warning.message}"
-      puts msg
+      logger.info msg
     end
 
     def process_tweet(tweet)
