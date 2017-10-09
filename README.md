@@ -10,9 +10,9 @@ Uses Twitter's streaming api to keep track of followed users' actions. Displays 
 4. rails server
 
 ### To start saving tweets&media:
-1. Update config/secrets.yml file.
-
-2.`rails runner bin/twitter_observer.rb`
+1. Create database.yml
+2. Update config/secrets.yml file.
+3. `rails runner bin/twitter_observer.rb`
 
 ### Additional information:
 * Ruby v2.2.5
