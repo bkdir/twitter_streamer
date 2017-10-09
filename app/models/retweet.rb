@@ -1,6 +1,6 @@
 class Retweet < Tweet
-  def parse_tweet tweet
-    super.merge({ rt_id: tweet.id.to_s })
+  def parse_tweet(tweet)
+    super.merge(rt_id: tweet.id.to_s)
   end
 
   def media_info

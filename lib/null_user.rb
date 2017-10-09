@@ -7,6 +7,11 @@ class NullUser
   end
   def password_confirmation
   end
+  def admin
+    false
+  end
+  def last_login
+  end
   def created_at
   end
   def updated_at

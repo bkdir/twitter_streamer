@@ -1,9 +1,6 @@
 class Quote < Tweet
-  def parse_tweet tweet
-    super.merge({
-      rt_id: tweet.id.to_s, 
-      quoted_text: quoted_text
-    })
+  def parse_tweet(tweet)
+    super.merge(rt_id: tweet.id.to_s, quoted_text: original_text)
   end
 
   def media_info 
@@ -14,7 +11,7 @@ class Quote < Tweet
     tweet.media
   end
 
-  def quoted_text
+  def original_text
     tweet = @tweet.quoted_status
     tweet.truncated? ? tweet.attrs[:extended_tweet][:full_text] : tweet.full_text
   end
