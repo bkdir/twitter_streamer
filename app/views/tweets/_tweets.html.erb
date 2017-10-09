@@ -17,7 +17,7 @@
       "#{link_to '\1', '\1', target: "_blank"}" ).html_safe %>
   </p>
 
-  <% if tweet.is_quote? %>
+  <% if tweet.quote? %>
     <blockquote class="blockquote list-group-item-text">
       <p class="mb-0">Quoted: 
         <em><%= tweet.quoted_text.gsub(/(https?:\/\/\S+)/, 
@@ -27,7 +27,7 @@
   <% end %>
 	<ul class="list-group-item-text list-inline small">
     <li><span class="label label-info">
-          <%= tweet.is_retweet? ? "Retweet" : "Tweet" %>
+          <%= tweet.retweet? ? "Retweet" : "Tweet" %>
         </span>
     </li>
     <li><span class=""><%= fa_icon 'camera' %> <%= tweet.media.count %></span></li>

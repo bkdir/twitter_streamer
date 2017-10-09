@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926021804) do
+ActiveRecord::Schema.define(version: 20171009023331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20170926021804) do
     t.boolean  "deleted",     default: false
     t.datetime "created_at"
     t.datetime "deleted_at"
+    t.string   "type"
     t.index ["user_id", "deleted"], name: "index_tweets_on_user_id_and_deleted", using: :btree
   end
 

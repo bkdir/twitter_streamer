@@ -4,7 +4,7 @@ module TweetsHelper
 
   # only if the original tweet is not the source
   def get_tweet_source(tweet)
-    return nil unless tweet.is_retweet?
+    return nil unless tweet.retweet?
 
     begin
       client ||= TwitterClient.client
@@ -16,7 +16,7 @@ module TweetsHelper
 
   private
     def original_id(tweet)
-      tweet.is_retweet? ? tweet.rt_id : tweet.tweet_id
+      tweet.retweet? ? tweet.rt_id : tweet.tweet_id
     end
 
 end
